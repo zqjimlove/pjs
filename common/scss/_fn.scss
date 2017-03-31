@@ -1,0 +1,53 @@
+/* clear float */
+
+@mixin clearfix() {
+    &:after {
+        content: "";
+        height: 0;
+        font-size: 0;
+        display: block;
+        visibility: hidden;
+        clear: both;
+    }
+}
+
+/**
+ * px -> em
+ * @param  {[type]} $size px size
+ * @return {[type]}       em size
+ */
+
+@function rem($size) {
+    $remSize: ($size/2)/16;
+    @return #{$remSize}rem;
+}
+
+
+
+
+/**
+ * sprite icon
+ * @param  {[type]} $sprite   [iconName]
+ * @param  {[type]} $path       [description]
+ * @param  {[type]} $retinaPath [description]
+ * @return {[type]}             [description]
+ */
+
+@mixin sprite($path, $sprite) {
+    $icons: sprite-map($path+"/*.png", $layout: smart);
+    background-image: sprite-url($icons);
+    background-size: (image-width(sprite-path($icons)) / 2) (image-height(sprite-path($icons)) / 2);
+    background-position: round(nth(sprite-position($icons, $sprite), 1) / 2) round(nth(sprite-position($icons, $sprite), 2) / 2);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: inline-block;
+    height: image-height(sprite-file($icons, $sprite)) / 2;
+    width: image-width(sprite-file($icons, $sprite)) / 2;
+
+}
+
+@mixin sprite-position($path, $sprite) {
+    $icons: sprite-map($path+"/*.png", $layout: smart);
+    background-position: round(nth(sprite-position($icons, $sprite), 1) / 2) round(nth(sprite-position($icons, $sprite), 2) / 2);
+
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,minimal-ui, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>生成长文图片</title>
+    <link href="//fonts.lug.ustc.edu.cn/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="./statics/css/md.css">
+</head>
+
+<body class="show-edit-wrap">
+    <div class="main-wrap">
+        <div id="editWrap" class="edit-wrap">
+            <div class="input-wrap">
+                <input placeholder="英语标题" type="text" id="enTitle" value="" />
+                <input placeholder="标题" type="text" id="title" value="" />
+                <textarea placeholder="正文" id="text" rows="" cols=""></textarea>
+            </div>
+            <div class="btn-wrap">
+                <button onclick="Converter()" class="btn">生成</button>
+            </div>
+        </div>
+        <div class="md-wrap" id="mdWrap">
+        </div>
+        <div id="genWrap" class="gen-wrap">
+            <img id="genImg" src="" alt="">
+            <div class="btn-wrap">
+                <a id="dlBtn" class="btn" download>下载</a>
+                <button onclick="ReEdit()"  class="btn btn-green">重新编辑</button>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
+    <script src="//cdn.staticfile.org/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="//cdn.staticfile.org/html2canvas/0.5.0-beta4/html2canvas.svg.min.js"></script>
+    <script id="titleTpl" type="text/html5">
+        <div class="title-wrap">
+            <div class="sub-title">${enTitle}</div>
+            <div class="title">${title}</div>
+            <div class="author">文 / 胡晋 | By Woo</div>
+        </div>
+    </script>
+    <script src="./statics/scripts/index.js">
+    </script>
+</body>
+
+</html>

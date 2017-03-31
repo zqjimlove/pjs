@@ -1,0 +1,32 @@
+{
+  "name": "glup",
+  "version": "0.1.0",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "*",
+    "gulp-bower": "*",
+    "gulp-changed": "*",
+    "gulp-clean": "*",
+    "gulp-clean-css": "^3",
+    "gulp-compass": "*",
+    "gulp-connect": "*",
+    "gulp-copy": "0.0.2",
+    "gulp-html-minifier": "^0.1.8",
+    "gulp-imagemin": "*",
+    "gulp-replace": "^0.5.4",
+    "gulp-typescript": "^3.1.5",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "gulp-watch": "*",
+    "imagemin-pngquant": "*",
+    "main-bower-files": "*",
+    "proxy-middleware": "*",
+    "run-sequence": "^1.2.2",
+    "typescript": "^2.2",
+    "yargs": "*"
+  },
+  "dependencies": {
+    "gulp-rsync": "^0.0.7",
+    "typings": "^2.1.0"
+  }
+}
