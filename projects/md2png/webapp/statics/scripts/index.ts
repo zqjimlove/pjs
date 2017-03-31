@@ -7,9 +7,14 @@ var genWrapEl = document.getElementById('genWrap');
 var mdWrapEl = document.getElementById('mdWrap');
 var enTitleEl = <HTMLInputElement>document.getElementById('enTitle');
 var titleEl = <HTMLInputElement>document.getElementById('title');
+var nameEl = <HTMLInputElement>document.getElementById('name');
+var enNameEl = <HTMLInputElement>document.getElementById('enName');
 var genImgEl = <HTMLImageElement>document.getElementById('genImg');
 var dlBtnEl = <HTMLLinkElement>document.getElementById('dlBtn');
 
+
+nameEl.value = window.localStorage['name'] || '';
+enNameEl.value = window.localStorage['enName'] || '';
 
 function ReEdit() {
     document.body.className = "show-edit-wrap";
@@ -45,8 +50,11 @@ function leftpad(str) {
 }
 
 function createTitleElement() {
+    window.localStorage['name'] = nameEl.value;
+    window.localStorage['enName'] = enNameEl.value;
     var tpl = document.getElementById('titleTpl').innerHTML;
-    return tpl.replace('${enTitle}', enTitleEl.value).replace('${title}', titleEl.value);
+    return tpl.replace('${enTitle}', enTitleEl.value).replace('${title}', titleEl.value)
+        .replace('${name}', nameEl.value).replace('${enName}', enNameEl.value);
 }
 
 function createDate() {

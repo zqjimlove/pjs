@@ -82,7 +82,7 @@ body,
     background: #fdfdfd;
     padding: rem(30);
     display: none;
-    transform: scale(2.5);
+    // transform: scale(2.5);
     transform-origin: left top;
     color: #333;
     line-height: 1.8;
@@ -94,20 +94,20 @@ body,
         color: #333;
         @include clearfix;
     }
-    .title {
-        font-size: rem(44);
-        width: 80%;
+    .sub-title {
+        font-size: rem(46);
+        width: 86%;
         text-align: left;
         padding-top: rem(12);
     }
-    .sub-title {
-        font-size: rem(46);
-        width: 70%;
+    .title {
+        font-size: rem(52);
+        width: 76%;
         text-align: left;
         border-bottom: 1px solid #555;
         word-spacing: 1px;
         padding-bottom: rem(10);
-        letter-spacing: -1.5px;
+        letter-spacing: -1px;
     }
     .author {
         margin: rem(30) 0 rem(240);
@@ -185,6 +185,10 @@ body,
         margin-top: 0;
         margin-bottom: 0;
         font: 12px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    }
+    img {
+        max-width: 100%;
+        display: block;
     }
 }
 

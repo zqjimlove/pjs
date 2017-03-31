@@ -16,8 +16,10 @@
     <div class="main-wrap">
         <div id="editWrap" class="edit-wrap">
             <div class="input-wrap">
-                <input placeholder="英语标题" type="text" id="enTitle" value="" />
-                <input placeholder="标题" type="text" id="title" value="" />
+                <input placeholder="标题" type="text" id="enTitle" value="" />
+                <input placeholder="副标题" type="text" id="title" value="" />
+                <input placeholder="作者名" type="text" id="name" value="" />
+                <input placeholder="作者英文名" type="text" id="enName" value="" />
                 <textarea placeholder="正文" id="text" rows="" cols=""></textarea>
             </div>
             <div class="btn-wrap">
@@ -30,7 +32,7 @@
             <img id="genImg" src="" alt="">
             <div class="btn-wrap">
                 <a id="dlBtn" class="btn" download>下载</a>
-                <button onclick="ReEdit()"  class="btn btn-green">重新编辑</button>
+                <button onclick="ReEdit()" class="btn btn-green">重新编辑</button>
             </div>
         </div>
     </div>
@@ -39,9 +41,9 @@
     <script src="//cdn.staticfile.org/html2canvas/0.5.0-beta4/html2canvas.svg.min.js"></script>
     <script id="titleTpl" type="text/html5">
         <div class="title-wrap">
-            <div class="sub-title">${enTitle}</div>
-            <div class="title">${title}</div>
-            <div class="author">文 / 胡晋 | By Woo</div>
+            <div class="title">${enTitle}</div>
+            <div class="sub-title">${title}</div>
+            <div class="author">文 / ${name} | By ${enName}</div>
         </div>
     </script>
     <script src="./statics/scripts/index.js">
