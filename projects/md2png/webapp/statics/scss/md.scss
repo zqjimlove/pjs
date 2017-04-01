@@ -82,7 +82,7 @@ body,
     background: #fdfdfd;
     padding: rem(30);
     display: none;
-    // transform: scale(2.5);
+    transform: scale(2.5);
     transform-origin: left top;
     color: #333;
     line-height: 1.8;
@@ -155,6 +155,10 @@ body,
     p {
         margin: rem(50) 0;
     }
+    p.p_img{
+        margin-left: rem(-30);
+        margin-right: rem(-30);
+    }
     strong {
         font-weight: 600;
     }
@@ -177,18 +181,52 @@ body,
     }
     blockquote {
         margin: 0;
-        padding: rem(1) rem(20);
+        padding: 0 rem(20);
         color: #444;
         background: #eee;
+        font-size: rem(32);
     }
     pre {
         margin-top: 0;
         margin-bottom: 0;
         font: 12px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     }
+    code {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        font-size: 12px;
+    }
     img {
         max-width: 100%;
         display: block;
+    }
+    ul,
+    ol {
+        padding-left: rem(40);
+        margin-top: 0;
+        margin-bottom: 0;
+        li {
+            margin: rem(20) 0;
+            position: relative;
+            &:before{
+                position: absolute;
+                content:" ";
+                width: rem(8);
+                height: rem(8);
+                background: #333;
+                top: rem(22);
+                left: rem(-26);
+            }
+        }
+    }
+    ol ol,
+    ul ol {
+        list-style-type: lower-roman;
+    }
+    ul ul ol,
+    ul ol ol,
+    ol ul ol,
+    ol ol ol {
+        list-style-type: lower-alpha;
     }
 }
 

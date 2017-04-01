@@ -1,7 +1,17 @@
 declare const showdown: any;
 declare const html2canvas: any;
 
-var converter = new showdown.Converter();
+
+var myRender = function () {
+    var ImageRender = {
+        type: 'output',
+        regex: /<p><img/g,
+        replace: '<p class="p_img"><img crossorigin="Anonymous"'
+    }
+    showdown.extension('ImageRender', ImageRender);
+}
+myRender()
+var converter = new showdown.Converter({ extensions: ['ImageRender'] });
 var editWrapEl = document.getElementById('editWrap');
 var genWrapEl = document.getElementById('genWrap');
 var mdWrapEl = document.getElementById('mdWrap');
@@ -39,7 +49,9 @@ function Converter() {
         },
         width: mdWrapEl.offsetWidth * 2.5,
         height: mdWrapEl.offsetHeight * 2.5,
-        letterRendering: true
+        letterRendering: true,
+        allowTaint: true,
+        useCORS:true
     })
 }
 
@@ -61,3 +73,5 @@ function createDate() {
     let now = new Date();
     return '<div class="date">' + now.getFullYear() + '/' + leftpad(now.getMonth() + 1) + '/' + leftpad(now.getDate()) + '</div>'
 }
+
+
