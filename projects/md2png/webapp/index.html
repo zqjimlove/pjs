@@ -6,46 +6,84 @@
     <meta name="description" content="" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width,minimal-ui, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="mobile-agent" content="format=html5;url=https://www.zhihu.com/">
     <title>生成长文图片</title>
     <link href="//fonts.lug.ustc.edu.cn/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="./statics/css/md.css">
 </head>
 
-<body class="show-edit-wrap">
+<body ontouchstart="" class="show-edit-wrap">
+    <div id="loading">
+        <div class="sk-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+        <div class="load-text">
+            正在加载
+        </div>
+    </div>
     <div class="main-wrap">
         <div id="editWrap" class="edit-wrap">
-            <div class="input-wrap">
+            <div class="input-wrap" id="formWrap">
                 <input placeholder="标题" type="text" id="enTitle" value="" />
                 <input placeholder="副标题" type="text" id="title" value="" />
                 <input placeholder="作者名" type="text" id="name" value="" />
                 <input placeholder="作者英文名" type="text" id="enName" value="" />
-                <textarea placeholder="正文" id="text" rows="" cols=""></textarea>
+                <textarea class="editor" placeholder="正文" id="text" rows="20" cols="20"></textarea>
             </div>
             <div class="btn-wrap">
-                <button onclick="Converter()" class="btn">生成</button>
+                <button id="genBtn" class="btn">生成</button>
+                <button id="previewBtn" class="btn btn-green">预览</button>
             </div>
         </div>
-        <div class="md-wrap" id="mdWrap">
+        <div class="md-wrap">
+            <div id="mdRenderWrap">
+
+            </div>
+            <div class="btn-wrap">
+                <button id="genBtn2" class="btn">生成</button>
+                <button onclick="document.body.className ='show-edit-wrap'" class="btn btn-green">继续编辑</button>
+            </div>
         </div>
         <div id="genWrap" class="gen-wrap">
             <img id="genImg" src="" alt="">
             <div class="btn-wrap">
                 <a id="dlBtn" class="btn" download>下载</a>
-                <button onclick="ReEdit()" class="btn btn-green">重新编辑</button>
+                <button onclick="document.body.className ='show-edit-wrap'" class="btn btn-green">重新编辑</button>
             </div>
         </div>
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.6.3/showdown.min.js"></script>
-    <script src="//cdn.staticfile.org/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <div id="mpBodyEditWrap" class="mp-body-edit-wrap">
+        <div class="toolbar" id="editToolbar">
+            <a class="inser_img" href="javascript:;">插入图片
+                <input accept="image/*" type="file" name="" id="inserImage">
+            </a>
+            <a href="javascript:;" id="editdone" class="right">完成</a>
+        </div>
+    </div>
+    <script>
+        var requirejs = {
+            baseUrl: './statics/scripts'
+        }
+    </script>
+    <script src="https://cdn.staticfile.org/require.js/2.3.3/require.min.js" data-main="index"></script>
     <script id="titleTpl" type="text/html5">
         <div class="title-wrap">
             <div class="title">${enTitle}</div>
             <div class="sub-title">${title}</div>
             <div class="author">文 / ${name} | By ${enName}</div>
         </div>
-    </script>
-    <script src="./statics/scripts/index.js">
     </script>
 </body>
 

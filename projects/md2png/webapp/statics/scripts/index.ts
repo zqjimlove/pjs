@@ -1,59 +1,83 @@
 declare const showdown: any;
 declare const html2canvas: any;
 
+import Render from './MarkDownRender';
+import Editor from './Editor';
+import * as html2canvas from '//cdn.staticfile.org/html2canvas/0.5.0-beta4/html2canvas.min.js'
 
-var myRender = function () {
-    var ImageRender = {
-        type: 'output',
-        regex: /<p><img/g,
-        replace: '<p class="p_img"><img crossorigin="Anonymous"'
-    }
-    showdown.extension('ImageRender', ImageRender);
+function $(selector: string): Element {
+    return document.querySelector(selector);
 }
-myRender()
-var converter = new showdown.Converter({ extensions: ['ImageRender'] });
-var editWrapEl = document.getElementById('editWrap');
-var genWrapEl = document.getElementById('genWrap');
-var mdWrapEl = document.getElementById('mdWrap');
-var enTitleEl = <HTMLInputElement>document.getElementById('enTitle');
-var titleEl = <HTMLInputElement>document.getElementById('title');
-var nameEl = <HTMLInputElement>document.getElementById('name');
-var enNameEl = <HTMLInputElement>document.getElementById('enName');
-var genImgEl = <HTMLImageElement>document.getElementById('genImg');
-var dlBtnEl = <HTMLLinkElement>document.getElementById('dlBtn');
 
-
+let editWrapEl = $('#editWrap'),
+    genWrapEl = $('#genWrap'),
+    mdWrapEl = <HTMLDivElement>$('#mdRenderWrap'),
+    enTitleEl = <HTMLInputElement>$('#enTitle'),
+    titleEl = <HTMLInputElement>$('#title'),
+    nameEl = <HTMLInputElement>$('#name'),
+    enNameEl = <HTMLInputElement>$('#enName'),
+    genImgEl = <HTMLImageElement>$('#genImg'),
+    textEl = <HTMLInputElement>$('#text'),
+    mpBodyEditWrapEl = <HTMLInputElement>$('#mpBodyEditWrap'),
+    // mpBodyEditer = <HTMLDivElement>$('#mpBodyEditer'),
+    dlBtnEl = <HTMLLinkElement>$('#dlBtn');
 nameEl.value = window.localStorage['name'] || '';
 enNameEl.value = window.localStorage['enName'] || '';
 
-function ReEdit() {
-    document.body.className = "show-edit-wrap";
+
+
+class App {
+    private editor: Editor;
+    constructor() {
+        this.editor = new Editor();
+        document.body.removeChild($('#loading'))
+        this.bind()
+    }
+    bind() {
+        let that = this;
+        $('#genBtn').addEventListener('click', () => {
+            this.generate();
+        })
+        $('#genBtn2').addEventListener('click', () => {
+            this.generate();
+        })
+        $('#previewBtn').addEventListener('click', () => {
+            this.preview();
+        })
+    }
+    preview() {
+        var text = textEl.value,
+            html = Render.convert(text, this.editor.getImages());
+        mdWrapEl.innerHTML = createTitleElement() + html + createDate();
+        document.body.className = "show-preview-wrap";
+    }
+    generate() {
+        var text = textEl.value,
+            html = Render.convert(text, this.editor.getImages());
+        mdWrapEl.innerHTML = createTitleElement() + html + createDate();
+        document.body.className = "show-mp-render-wrap";
+        try {
+            html2canvas(mdWrapEl, {
+                onrendered: function (canvas) {
+                    var dataURL = canvas.toDataURL('image/png');
+                    genImgEl.src = dataURL;
+                    dlBtnEl.href = dataURL;
+                    document.body.className = "show-gen-wrap";
+                },
+                width: mdWrapEl.offsetWidth * 2.5,
+                height: mdWrapEl.offsetHeight * 2.5,
+                letterRendering: true,
+                allowTaint: true,
+                useCORS: true
+            })
+        } catch (e) {
+            alert('Canvas FAIL');
+        }
+    }
 }
-function Converter() {
-    var text = (<HTMLInputElement>document.getElementById('text')).value,
-        html = converter.makeHtml(text);
-    mdWrapEl.innerHTML = createTitleElement() + html + createDate();
-    document.body.className = "show-mp-render-wrap";
 
+new App();
 
-    html2canvas(mdWrapEl, {
-        onrendered: function (canvas) {
-
-            var dataURL = canvas.toDataURL('image/png');
-            document.body.className = "show-gen-wrap";
-            genImgEl.src = dataURL;
-            dlBtnEl.href = dataURL;
-            document.body.className = "show-gen-wrap";
-            // window.location.href = dataURL;
-            // document.body.appendChild(canvas);
-        },
-        width: mdWrapEl.offsetWidth * 2.5,
-        height: mdWrapEl.offsetHeight * 2.5,
-        letterRendering: true,
-        allowTaint: true,
-        useCORS:true
-    })
-}
 
 function leftpad(str) {
     str = str + '';
