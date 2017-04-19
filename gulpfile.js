@@ -184,7 +184,7 @@ gulp.task('compress', function(callback) {
 
 gulp.task('server-dist', [], function() {
     connect.server({
-        port: 7000,
+        port: 8000,
         host: '0.0.0.0',
         root: [projectPath + '/dist'],
         livereload: true,
@@ -220,7 +220,7 @@ gulp.task('server', ['bower'], function() {
     mode = __DEV;
     //服务开启
     connect.server({
-        port: 7000,
+        port: 8000,
         host: '0.0.0.0',
         root: [projectSourcePath, projectPath + '/.tmp', 'common'],
         livereload: true,
